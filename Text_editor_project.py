@@ -106,12 +106,12 @@ def redo(event=None):
 
 def display_about(event=None):
     tkinter.messagebox.showinfo(
-        "About",NAME + "\n This is the simple text editor as same as other editor\nevery feature related to notepad")
+        "About",NAME + "\n This is the simple text editor as same as other editor\every feature related to notepad")
 
 
 def display_help(event=None):
     tkinter.messagebox.showinfo(
-        "Help", "This Text Editor works similar to any other editors.",
+        "Help", "This Text Editor works similar to any other editors which will provide you every features",
         icon='question')
 
 
@@ -235,9 +235,6 @@ menu_bar.add_cascade(label='Edit', menu=edit_menu)
 
 
 view_menu = Menu(menu_bar, tearoff=0)
-view_menu.add_command(label='statusbar')
-view_menu.add_command(label='zoom in')
-view_menu.add_command(label='zoomout')
 edit_menu.add_separator()
 show_line_number = IntVar()
 show_line_number.set(1)
@@ -257,11 +254,11 @@ about_menu.add_command(label='Help', underline=0, command=display_help)
 # end of About Menu
 root.config(menu=menu_bar)
 
-# adding top shortcut bar and left line number bar
+# dding top shortcut bar and left line number bar
 shortcut_bar = Frame(root, height=25)
 shortcut_bar.pack(expand='no', fill='x')
 
-# adding shortcut icons
+# Adding shortcut icons
 icons = ('new_file', 'open_file', 'save', 'cut', 'copy', 'paste', 'undo', 'redo')
 for i, icon in enumerate(icons):
     tool_bar_icon = PhotoImage(file='icons/{}.gif'.format(icon)).zoom(2, 2)
@@ -295,7 +292,7 @@ for i in ('cut', 'copy', 'paste', 'undo', 'redo'):
 popup_menu.add_separator()
 content_text.bind('<Button-3>', show_popup_menu)
 
-# handling binding
+# Handling binding
 
 content_text.bind('<Control-N>', new_file)
 content_text.bind('<Control-n>', new_file)
