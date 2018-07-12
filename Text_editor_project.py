@@ -6,8 +6,8 @@ import tkinter.messagebox
 root = Tk()
 root.iconbitmap('icons/favicon.ico')
 
-PROGRAM_NAME = "TextEditor"
-root.title(PROGRAM_NAME)
+NAME = "TextEditor"
+root.title(NAME)
 file_name = None
 root.geometry('800x400')
 
@@ -32,7 +32,7 @@ def open_file(event=None):
     if input_file_name:
         global file_name
         file_name = input_file_name
-        root.title('{} - {}'.format(os.path.basename(file_name), PROGRAM_NAME))
+        root.title('{} - {}'.format(os.path.basename(file_name),NAME))
         content_text.delete(1.0, END)
         with open(file_name) as _file:
             content_text.insert(1.0, _file.read())
@@ -58,7 +58,7 @@ def save_as(event=None):
         global file_name
         file_name = input_file_name
         write_to_file(file_name)
-        root.title('{} - {}'.format(os.path.basename(file_name), PROGRAM_NAME))
+        root.title('{} - {}'.format(os.path.basename(file_name),NAME))
     return "break"
 
 
@@ -106,7 +106,7 @@ def redo(event=None):
 
 def display_about(event=None):
     tkinter.messagebox.showinfo(
-        "About", PROGRAM_NAME + "\n This is the simple text editor as same as other editor\nevery feature related to notepad")
+        "About",NAME + "\n This is the simple text editor as same as other editor\nevery feature related to notepad")
 
 
 def display_help(event=None):
