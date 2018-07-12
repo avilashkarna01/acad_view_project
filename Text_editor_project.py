@@ -316,4 +316,5 @@ content_text.focus_set()
 # END OF MENU
 
 root.protocol('WM_DELETE_WINDOW', exit_editor)
+#Root for main window
 root.mainloop()
