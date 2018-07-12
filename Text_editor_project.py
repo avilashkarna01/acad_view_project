@@ -6,16 +6,14 @@ import tkinter.messagebox
 root = Tk()
 root.iconbitmap('icons/favicon.ico')
 
-NAME = "TextEditor"
-root.title(NAME)
+name = "TextEditor"
+root.title(name)
 file_name = None
-root.geometry('800x400')
+root.geometry('900x500')
 
 
-# all codes goes here
-
-
-# FILE MENU
+#functions
+# File Menu
 def new_file(event=None):
     root.title("Untitled")
     global file_name
@@ -32,7 +30,7 @@ def open_file(event=None):
     if input_file_name:
         global file_name
         file_name = input_file_name
-        root.title('{} - {}'.format(os.path.basename(file_name),NAME))
+        root.title('{} - {}'.format(os.path.basename(file_name),name))
         content_text.delete(1.0, END)
         with open(file_name) as _file:
             content_text.insert(1.0, _file.read())
@@ -52,13 +50,13 @@ def write_to_file(file_name):
 def save_as(event=None):
     input_file_name = tkinter.filedialog.asksaveasfilename(defaultextension=".txt",
                                                            filetypes=[("All Files", "*.*"), ("Text Documents", "*.txt"),
-                                                                      ("HTML", "*.html"), ("CSS", "*.css"),
-                                                                      ("JavaScript", "*.js")])
+                                                                    
+                                                                     ("JavaScript", "*.js")])
     if input_file_name:
         global file_name
         file_name = input_file_name
         write_to_file(file_name)
-        root.title('{} - {}'.format(os.path.basename(file_name),NAME))
+        root.title('{} - {}'.format(os.path.basename(file_name),name))
     return "break"
 
 
@@ -69,9 +67,9 @@ def save(event=None):
     else:
         write_to_file(file_name)
     return "break"
+#End of file menu
 
-
-# EDIT MENU
+# For Edit Menu
 def cut():
     content_text.event_generate("<<Cut>>")
     on_content_changed()
@@ -101,12 +99,12 @@ def redo(event=None):
     on_content_changed()
     return "break"
 
-
+#End of Edit Menu
 # ABOUT MENU
 
 def display_about(event=None):
     tkinter.messagebox.showinfo(
-        "About",NAME + "\n This is the simple text editor as same as other editor\every feature related to notepad")
+        "About",name + "\n This is the simple text editor as same as other editor\every feature related to notepad")
 
 
 def display_help(event=None):
@@ -116,11 +114,11 @@ def display_help(event=None):
 
 
 def exit_editor(event=None):
-    if tkinter.messagebox.askokcancel("Exit", "Are you sure you want to Quit?"):
+    
         root.destroy()
 
 
-# adding Line Numbers Functionality
+# Here, adding Line Numbers Functionality
 def get_line_numbers():
     output = ''
     if show_line_number.get():
@@ -143,7 +141,7 @@ def update_line_numbers(event=None):
     line_number_bar.config(state='disabled')
 
 
-# Adding Cursor Functionality
+# Here ,Adding Cursor Functionality
 def show_cursor():
     show_cursor_info_checked = show_cursor_info.get()
     if show_cursor_info_checked:
@@ -159,7 +157,7 @@ def update_cursor(event=None):
     cursor_info_bar.config(text=infotext)
 
 
-# Adding Text Highlight Functionality
+# Here, Adding Text Highlight Functionality
 def highlight_line(interval=100):
     content_text.tag_remove("active_line", 1.0, "end")
     content_text.tag_add(
@@ -190,9 +188,12 @@ def change_theme(event=None):
 # pop-up menu
 def show_popup_menu(event):
     popup_menu.tk_popup(event.x_root, event.y_root)
+	
+	#End of About Menu
+	
 
 
-# ICONS for the compound menu
+# Icons for the compound menu path
 new_file_icon = PhotoImage(file='icons/new_file.gif')
 open_file_icon = PhotoImage(file='icons/open_file.gif')
 save_file_icon = PhotoImage(file='icons/save.gif')
@@ -203,8 +204,8 @@ undo_icon = PhotoImage(file='icons/undo.gif')
 redo_icon = PhotoImage(file='icons/redo.gif')
 find_icon = PhotoImage(file='icons/find_text.gif')
 
-# MENU CODES GOES HERE
-menu_bar = Menu(root)  # menu begins
+#Here File Menu codes Begains
+menu_bar = Menu(root) 
 
 file_menu = Menu(menu_bar, tearoff=0)
 file_menu.add_command(label='New', accelerator='Ctrl+N', compound='left', image=new_file_icon, underline=0,
@@ -217,7 +218,7 @@ file_menu.add_command(label="Save As", accelerator='Ctrl+Shift+S', compound='lef
 file_menu.add_separator()
 file_menu.add_command(label="Exit", accelerator='Alt+F4', compound='left', underline=0, command=exit_editor)
 menu_bar.add_cascade(label='File', menu=file_menu)
-# end of File Menu
+# End of File Menu
 
 edit_menu = Menu(menu_bar, tearoff=0)
 edit_menu.add_command(label='Undo', accelerator='Ctrl + Z', compound='left', image=undo_icon, underline=0, command=undo)
@@ -231,7 +232,7 @@ edit_menu.add_separator()
 
 edit_menu.add_separator()
 menu_bar.add_cascade(label='Edit', menu=edit_menu)
-# end of Edit Menu
+# End of Edit Menu
 
 
 view_menu = Menu(menu_bar, tearoff=0)
@@ -251,10 +252,10 @@ about_menu = Menu(menu_bar, tearoff=0)
 menu_bar.add_cascade(label='About', menu=about_menu)
 about_menu.add_command(label='About', underline=0, command=display_about)
 about_menu.add_command(label='Help', underline=0, command=display_help)
-# end of About Menu
 root.config(menu=menu_bar)
+#End of About Menu
 
-# dding top shortcut bar and left line number bar
+# Adding top shortcut bar and left line number bar
 shortcut_bar = Frame(root, height=25)
 shortcut_bar.pack(expand='no', fill='x')
 
